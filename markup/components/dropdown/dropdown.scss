@@ -9,7 +9,7 @@
         align-items: center;
         transition: all 0.2s ease-in-out;
         user-select: none;
-        
+
         @include baseHover {
             color: #9d5cd0;
         }
@@ -51,6 +51,7 @@
             font-size: 14px;
             line-height: 19px;
             border: 2px solid transparent;
+
             @include baseHover {
                 border: 2px solid #9d5cd0;
             }
@@ -62,6 +63,7 @@
             a {
                 padding: 9px 14px;
                 display: block;
+                
                 &:focus {
                     &:after {
                         content: '';
