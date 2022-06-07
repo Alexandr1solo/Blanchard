@@ -1,29 +1,10 @@
-/*
- * little api for use more one map on the page and interactive with anyone map on the page.
- * all maps collect to global array map[], with map container id as array key
- * map['social-cards-map', 'commercial-map'] for example
- *
- * Example of use:
- *  let arData = {  <--------------------------------------------------------------------------- set arData of yandex map (map-container-id, placemarks, etc.)
- *      'yandexMapID': 'social-cards-map',
- *  };
- *
- *  ymaps.ready(function () {   <--------------------------------------------------------------- when YandexAPI ready on the page
- *      initYandexMap(arData).then((response) => {  <------------------------------------------- find map container and construct map
- *          if (response) {     <--------------------------------------------------------------- if map container is exist and map was created
- *              map[arData.yandexMapID].setCenter([57.1500079, 65.5247413], 10, {});  <--------- ur code
- *          }
- *      });
- *  });
- *
- * */
-
 let isMapContainerExist = function (containerId) {
     return !!document.getElementById(containerId);
 };
 let constructMap = function (arData) {
     if (isMapContainerExist(arData.yandexMapID)) {
         let mapContainer = document.getElementById(arData.yandexMapID);
+        const circleLayout = ymaps.templateLayoutFactory.createClass('<div class="map__placemark"></div>');
 
         // Проверка наличия контейнера в DOM
         if (!mapContainer) {
@@ -49,7 +30,6 @@ let constructMap = function (arData) {
         });
 
         // Настройка контролов управления
-        map[arData.yandexMapID].controls.remove('geolocationControl');
         map[arData.yandexMapID].controls.remove('searchControl');
         map[arData.yandexMapID].controls.remove('trafficControl');
         map[arData.yandexMapID].controls.remove('typeSelector');
@@ -72,13 +52,15 @@ let constructMap = function (arData) {
             } else {
                 placemark = new ymaps.Placemark(
                     [point.position.lat, point.position.lng],
-                    {},
+                    {hintContent: point.hint},
                     {
-                        iconImageHref: point.imgUrl,
-                        iconImageSize: point.imgSize,
-                        iconImageOffset: point.imgOffset,
-                        iconLayout: 'default#image',
                         iconId: point.id,
+                        iconLayout: circleLayout,
+                        iconShape: {
+                            type: 'Circle',
+                            coordinates: [0, 0],
+                            radius: 20
+                        }
                     },
                 );
             }

@@ -9,12 +9,12 @@ function initSlimSelect(selector) {
             counter.innerHTML = `Выбрано: <span class="${clearClass}__counter-value"></span>`;
             itemParent.append(counter);
         }
+
         new SlimSelect({
             select: item,
             showSearch: false,
             closeOnSelect: !item.multiple,
             allowDeselectOption: true,
-            placeholder: item.attributes.placeholder.value,
             onChange: (info) => {
                 if (item.multiple) {
                     if (info.length > 0) {
@@ -26,6 +26,7 @@ function initSlimSelect(selector) {
                 }
             },
         });
+        
         const ssShell = itemParent.querySelector('.ss-main');
         if (arrow) ssShell.append(arrow);
     });
