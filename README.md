@@ -1,1 +1,1 @@
-# [DEMO](https://alexandr1solo.github.io/Blanchard/)
+# [Blanchard](https://alexandr1solo.github.io/Blanchard/)
