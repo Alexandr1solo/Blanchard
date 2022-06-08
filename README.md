@@ -1,1 +1,1 @@
-# [Open](https://alexandr1solo.github.io/Blanchard/)
+# [Open] (https://alexandr1solo.github.io/Blanchard/) 
